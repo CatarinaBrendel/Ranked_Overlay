@@ -16,7 +16,8 @@
     }
 
     // Some ranks don't have tier-specific icons and should always use the base icon
-    const noTierRanks = new Set(['Aspirant','Grandmaster','Challenger','Challenge'])
+    // Aspirant should display tiers, so do not include it here.
+    const noTierRanks = new Set(['Grandmaster','Challenger','Challenge'])
 
     const assetBaseName = (rankAssetMap[state.rank] || state.rank)
     const rankClean = assetBaseName.replace(/\s+/g,'_')
