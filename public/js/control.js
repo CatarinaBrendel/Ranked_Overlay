@@ -10,13 +10,14 @@
   const learnEl = document.getElementById('learn')
   const rpCard = document.getElementById('rp-card')
   const rpArea = document.getElementById('rp-area')
+  const layoutEl = document.getElementById('layout')
 
   if(!ranksEl || !tiersEl){
     console.error('Missing required DOM elements: ranks or tiers', {ranksEl, tiersEl})
     return
   }
 
-  let state = {rank: ranks[0], tier: tiers[0], win:0, learn:0, rp:0}
+  let state = {rank: ranks[0], tier: tiers[0], win:0, learn:0, rp:0, layout: 'vertical'}
 
   function renderList(container, items, key){
     container.innerHTML = ''
@@ -44,6 +45,7 @@
   function renderAll(){
     renderList(ranksEl, ranks, 'rank')
     renderList(tiersEl, tiers, 'tier')
+    renderLayout()
     winEl.textContent = state.win
     learnEl.textContent = state.learn
 
@@ -54,6 +56,24 @@
     }else{
       rpCard.style.display = 'none'
     }
+  }
+
+  function renderLayout(){
+    if(!layoutEl) return
+    layoutEl.innerHTML = ''
+    const opts = ['vertical','horizontal']
+    opts.forEach(o => {
+      const b = document.createElement('button')
+      b.textContent = o[0].toUpperCase() + o.slice(1)
+      if(state.layout === o) b.classList.add('selected')
+      b.addEventListener('click', ()=>{
+        state.layout = o
+        sendState()
+        renderAll()
+      })
+      b.setAttribute('data-layout', o)
+      layoutEl.appendChild(b)
+    })
   }
 
   function renderRp(){

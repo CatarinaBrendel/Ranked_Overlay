@@ -4,6 +4,9 @@
 
   function render(){
     root.innerHTML = ''
+    // ensure base class and layout class
+    root.className = 'badge'
+    if(state.layout === 'horizontal') root.classList.add('horizontal')
     const img = document.createElement('img')
     img.className='badge-img'
 
@@ -50,8 +53,11 @@
     }
     img.onerror = tryLoad
     tryLoad()
-    root.appendChild(img)
-    root.appendChild(fallback)
+    // top container groups image + text and adapts via CSS
+    const top = document.createElement('div')
+    top.className = 'badge-top'
+    top.appendChild(img)
+    top.appendChild(fallback)
 
     const txt = document.createElement('div')
     txt.className = 'text'
@@ -71,12 +77,14 @@
       rpDivText.textContent = `RP: ${state.rp || 0}`
       txt.appendChild(rpDivText)
     }
-    root.appendChild(txt)
+    top.appendChild(txt)
+    root.appendChild(top)
 
     const counters = document.createElement('div')
     counters.className='counters'
     counters.innerHTML = `<div>Win ${state.win}</div><div>Learn ${state.learn}</div>`
-    root.appendChild(counters)
+    // Place counters beneath the rank/tier text so they sit under the text column
+    txt.appendChild(counters)
   }
 
   // WebSocket updates

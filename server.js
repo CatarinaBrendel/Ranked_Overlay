@@ -25,7 +25,9 @@ const state = {
   tier: 'Tier I',
   win: 0,
   learn: 0,
-  rp: 0
+  rp: 0,
+  // layout: 'vertical' or 'horizontal'
+  layout: 'vertical'
 }
 
 let clients = []
@@ -66,6 +68,7 @@ app.post('/api/state', (req, res) => {
   if(typeof body.win === 'number') state.win = body.win
   if(typeof body.learn === 'number') state.learn = body.learn
   if(typeof body.rp === 'number') state.rp = body.rp
+  if(body.layout) state.layout = body.layout
   sendToClients(state)
   res.json(state)
 })
