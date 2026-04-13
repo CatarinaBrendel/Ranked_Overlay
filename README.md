@@ -7,7 +7,7 @@ Usage:
 1. Install dependencies
 
 ```bash
-cd "/Users/catarinabrendel/Documents/Stream Overlay/Badge_Overlay"
+cd "project/folder/location"
 npm install
 ```
 
