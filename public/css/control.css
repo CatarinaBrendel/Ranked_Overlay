@@ -1,0 +1,63 @@
+:root{
+  --bg:#0f172a;
+  --card:#0b1220;
+  --muted:#94a3b8;
+  --accent:#7c3aed;
+  --accent-2:#06b6d4;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;font-size:16px;min-height:100vh;background:linear-gradient(180deg,#071029 0%, #071226 100%);color:#e6eef8;padding:28px}
+.header{max-width:1100px;margin:0 auto 18px}
+.header h1{margin:0;font-size:24px}
+.subtitle{color:var(--muted);margin-top:6px}
+.grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:18px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+.card h2{margin:0 0 12px 0;font-size:14px;color:#fff}
+.inline-list{display:flex;gap:8px;flex-wrap:wrap}
+.inline-list button{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.15s}
+.inline-list button:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.35)}
+.inline-list .selected{background:var(--accent);color:#fff;border-color:transparent;box-shadow:none}
+
+/* Center the rank buttons specifically */
+#ranks{justify-content:center}
+.counter-row{display:flex;gap:12px}
+.counter-card{flex:1;background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;text-align:center}
+.counter-card .label{font-size:12px;color:var(--muted)}
+.counter-card .value{font-size:20px;font-weight:700;margin:6px 0}
+.counter-controls{display:flex;gap:8px;justify-content:center;align-items:center}
+.btn.small{padding:6px 10px;border-radius:8px;font-size:16px;min-width:44px}
+
+/* RP controls */
+.rp-value{font-size:18px;font-weight:700;margin-bottom:8px}
+.rp-controls{display:flex;gap:8px;justify-content:center;align-items:center}
+.rp-input{width:80px;padding:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit}
+.rp-area{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+.rp-display{font-size:16px;color:rgba(255,255,255,0.95);margin-top:4px;text-align:center}
+.rp-controls{display:flex;gap:8px;justify-content:center;align-items:center}
+.rp-controls .btn{min-width:44px;padding:6px 10px;border-radius:8px}
+.rp-controls .btn.small{min-width:40px;padding:6px 10px}
+
+/* RP input styling: neutral, centered, hide native spinners */
+.rp-input{width:84px;padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:inherit;text-align:center;font-weight:700;font-size:18px;box-shadow:none}
+.rp-input:focus{outline:none;box-shadow:0 0 0 4px rgba(124,58,237,0.08)}
+.rp-input::-webkit-outer-spin-button, .rp-input::-webkit-inner-spin-button{ -webkit-appearance: none; margin: 0 }
+.rp-input[type=number]{ -moz-appearance: textfield }
+.btn{padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#e6eef8;cursor:pointer}
+.btn.primary{background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.06);color:#e6eef8}
+.btn.primary.light{background:rgba(255,255,255,0.08);opacity:1}
+
+/* Win (green) and Learn (red) button variants */
+.btn.win{background:linear-gradient(90deg,#10b981,#059669);border:0;color:#fff;width:75px}
+.btn.win:hover{filter:brightness(1.03);transform:translateY(-2px)}
+.btn.learn{background:linear-gradient(90deg,#ef4444,#dc2626);border:0;color:#fff;width:75px}
+.btn.learn:hover{filter:brightness(1.03);transform:translateY(-2px)}
+.actions{margin-top:12px;display:flex;justify-content:center}
+
+.actions .btn{min-width:140px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.06);color:#e6eef8;padding:10px 14px;border-radius:10px}
+.actions .btn:hover{filter:brightness(1.05);transform:translateY(-2px)}
+
+@media (max-width:900px){
+  .grid{grid-template-columns:1fr}
+}
+
+.muted{color:var(--muted);padding:8px}

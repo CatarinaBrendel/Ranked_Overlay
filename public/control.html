@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Control</title>
+  <link rel="stylesheet" href="css/control.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Control Center</h1>
+    <div class="subtitle">Update rank, tier and streaks — changes push live to the overlay</div>
+  </header>
+
+  <main class="grid">
+    <section class="card">
+      <h2>Rank</h2>
+      <div id="ranks" class="inline-list"></div>
+    </section>
+
+    <section class="card">
+      <h2>Tier</h2>
+      <div id="tiers" class="inline-list"></div>
+    </section>
+
+    <section class="card" id="rp-card" style="display:none">
+      <h2>Rank Points (RP)</h2>
+      <div id="rp-area"></div>
+    </section>
+
+    <section class="card">
+      <h2>Counters</h2>
+      <div class="counter-row">
+          <div class="counter-card">
+            <div class="label">Win</div>
+            <div class="value" id="win">0</div>
+            <div class="counter-controls">
+              <button id="dec-win" class="btn win" data-delta="-1">− 1</button>
+              <button id="inc-win" class="btn win" data-delta="1">+ 1</button>
+            </div>
+          </div>
+          <div class="counter-card">
+            <div class="label">Learn</div>
+            <div class="value" id="learn">0</div>
+            <div class="counter-controls">
+              <button id="dec-learn" class="btn learn" data-delta="-1">− 1</button>
+              <button id="inc-learn" class="btn learn" data-delta="1">+ 1</button>
+            </div>
+          </div>
+      </div>
+      <div class="actions"><button id="reset" class="btn">Reset</button></div>
+    </section>
+  </main>
+
+  <script src="js/control.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Badge Overlay</title>
+  <style>
+    body{margin:0;overflow:hidden;background:transparent;height:100vh;display:flex;align-items:center;justify-content:center}
+    .badge{display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:system-ui,Arial;color:#ffffff;gap:8px;padding:16px;border-radius:14px;min-width:260px;max-width:420px;background:rgba(6,10,20,0.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 10px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.04)}
+    img.badge-img{width:220px;height:220px;object-fit:contain;margin-bottom:6px}
+    .rank{font-size:28px;font-weight:700;text-align:center;margin-top:0}
+    .tier{font-size:16px;color:rgba(255,255,255,0.9);margin-top:2px;text-align:center}
+    .rp-display{font-size:16px;color:rgba(255,255,255,0.95);margin-top:4px;text-align:center}
+    .counters{display:flex;gap:12px;font-size:18px;margin-top:8px}
+    .counters div{background:rgba(0,0,0,0.35);padding:6px 10px;border-radius:8px}
+    .fallback-text{font-size:20px;font-weight:700;color:#fff;text-align:center}
+  </style>
+</head>
+<body>
+  <div id="root" class="badge"></div>
+  <script src="js/overlay.js"></script>
+</body>
+</html>
