@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 // Also serve the top-level assets folder so files placed there are available at /assets/
 app.use('/assets', express.static(path.join(__dirname, 'assets')))
 
-// In-memory state
+// In-memory state (will be seeded from DB if available)
 const state = {
   rank: 'Aspirant',
   tier: 'Tier I',
@@ -28,6 +28,22 @@ const state = {
   rp: 0,
   // layout: 'vertical' or 'horizontal'
   layout: 'vertical'
+}
+
+// Persist state to SQLite using local helper
+let db = null
+try{
+  db = require('./db')
+  const row = db.getLatest()
+  if(row){
+    if(row.rank) state.rank = row.rank
+    if(row.tier) state.tier = row.tier
+    if(typeof row.win === 'number') state.win = row.win
+    if(typeof row.learn === 'number') state.learn = row.learn
+    if(typeof row.rp === 'number') state.rp = row.rp
+  }
+}catch(e){
+  console.warn('SQLite not available:', e.message)
 }
 
 let clients = []
@@ -69,6 +85,8 @@ app.post('/api/state', (req, res) => {
   if(typeof body.learn === 'number') state.learn = body.learn
   if(typeof body.rp === 'number') state.rp = body.rp
   if(body.layout) state.layout = body.layout
+  // persist
+  try{ if(db) db.upsert(state) }catch(e){}
   sendToClients(state)
   res.json(state)
 })
@@ -78,6 +96,8 @@ app.post('/api/increment', (req, res) => {
   const d = typeof delta === 'number' ? delta : 1
   if(field === 'win') state.win = Math.max(0, state.win + d)
   if(field === 'learn') state.learn = Math.max(0, state.learn + d)
+  // persist
+  try{ if(db) db.upsert(state) }catch(e){}
   sendToClients(state)
   res.json(state)
 })
@@ -87,6 +107,7 @@ app.post('/api/win', (req, res) => {
   const { delta } = req.body || {}
   const d = Number(delta) || 0
   state.win = Math.max(0, state.win + d)
+  try{ if(db) db.upsert(state) }catch(e){}
   sendToClients(state)
   res.json(state)
 })
@@ -95,6 +116,7 @@ app.post('/api/learn', (req, res) => {
   const { delta } = req.body || {}
   const d = Number(delta) || 0
   state.learn = Math.max(0, state.learn + d)
+  try{ if(db) db.upsert(state) }catch(e){}
   sendToClients(state)
   res.json(state)
 })
@@ -102,6 +124,7 @@ app.post('/api/learn', (req, res) => {
 app.post('/api/reset', (req, res) => {
   state.win = 0
   state.learn = 0
+  try{ if(db) db.upsert(state) }catch(e){}
   sendToClients(state)
   res.json(state)
 })

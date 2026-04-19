@@ -1,0 +1,25 @@
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# build / coverage
+dist/
+coverage/
+
+# local env
+.env
+.DS_Store
+
+# sqlite data and runtime artifacts
+data/
+*.db
+
+# logs and pid files
+*.log
+*.pid
+
+# editor folders
+.vscode/

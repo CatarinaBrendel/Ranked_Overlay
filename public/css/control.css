@@ -53,8 +53,8 @@ body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetic
 .btn.learn:hover{filter:brightness(1.03);transform:translateY(-2px)}
 .actions{margin-top:12px;display:flex;justify-content:center}
 
-.actions .btn{min-width:140px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.06);color:#e6eef8;padding:10px 14px;border-radius:10px}
-.actions .btn:hover{filter:brightness(1.05);transform:translateY(-2px)}
+.actions .btn{min-width:140px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.06);color:#e6eef8;padding:10px 14px;margin:10px 14px;border-radius:10px}
+.actions .btn:hover{filter:brightness(1.05);transform:translateY(-2px);background: rgba(255,255,255,0.1);}
 
 @media (max-width:900px){
   .grid{grid-template-columns:1fr}

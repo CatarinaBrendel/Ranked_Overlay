@@ -191,6 +191,31 @@
     }
   }
 
+  const saveBtn = document.getElementById('save')
+  if(saveBtn){
+    saveBtn.addEventListener('click', async ()=>{
+      try{
+        saveBtn.disabled = true
+        const prev = saveBtn.textContent
+        saveBtn.textContent = 'Saving...'
+        const res = await fetch('/api/state',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(state)})
+        if(res.ok){
+          saveBtn.textContent = 'Saved'
+          setTimeout(()=>{ saveBtn.textContent = prev }, 900)
+        } else {
+          saveBtn.textContent = 'Error'
+          setTimeout(()=>{ saveBtn.textContent = prev }, 1200)
+        }
+      }catch(e){
+        console.error('Save failed', e)
+        saveBtn.textContent = 'Error'
+        setTimeout(()=>{ saveBtn.textContent = 'Save' }, 1200)
+      }finally{
+        saveBtn.disabled = false
+      }
+    })
+  }
+
   // Listen to updates via WebSocket
   (function connectWS(){
     const proto = location.protocol === 'https:' ? 'wss:' : 'ws:'
