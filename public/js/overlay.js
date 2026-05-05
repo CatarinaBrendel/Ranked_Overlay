@@ -80,11 +80,14 @@
     top.appendChild(txt)
     root.appendChild(top)
 
-    const counters = document.createElement('div')
-    counters.className='counters'
-    counters.innerHTML = `<div>Win ${state.win}</div><div>Learn ${state.learn}</div>`
-    // Place counters beneath the rank/tier text so they sit under the text column
-    txt.appendChild(counters)
+    const showCounters = typeof state.showCounters === 'boolean' ? state.showCounters : true
+    if(showCounters){
+      const counters = document.createElement('div')
+      counters.className='counters'
+      counters.innerHTML = `<div>Win ${state.win}</div><div>Learn ${state.learn}</div>`
+      // Place counters beneath the rank/tier text so they sit under the text column
+      txt.appendChild(counters)
+    }
   }
 
   // WebSocket updates
@@ -93,7 +96,7 @@
     const ws = new WebSocket(proto + '//' + location.host + '/ws')
     ws.onmessage = e => { try{ state = JSON.parse(e.data); render() }catch(e){} }
     ws.onclose = () => setTimeout(connectWS, 1000)
-  })()
+  })();
 
   (async ()=>{ const res = await fetch('/api/state'); state = await res.json(); render() })()
 })()

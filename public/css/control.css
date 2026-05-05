@@ -43,18 +43,22 @@ body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetic
 .rp-input::-webkit-outer-spin-button, .rp-input::-webkit-inner-spin-button{ -webkit-appearance: none; margin: 0 }
 .rp-input[type=number]{ -moz-appearance: textfield }
 .btn{padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#e6eef8;cursor:pointer}
+.btn{transition:transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease}
 .btn.primary{background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.06);color:#e6eef8}
 .btn.primary.light{background:rgba(255,255,255,0.08);opacity:1}
 
 /* Win (green) and Learn (red) button variants */
 .btn.win{background:linear-gradient(90deg,#10b981,#059669);border:0;color:#fff;width:75px}
 .btn.win:hover{filter:brightness(1.03);transform:translateY(-2px)}
+.btn.win:active{transform:translateY(2px) scale(0.99);filter:brightness(0.98)}
 .btn.learn{background:linear-gradient(90deg,#ef4444,#dc2626);border:0;color:#fff;width:75px}
 .btn.learn:hover{filter:brightness(1.03);transform:translateY(-2px)}
+.btn.learn:active{transform:translateY(2px) scale(0.99);filter:brightness(0.98)}
 .actions{margin-top:12px;display:flex;justify-content:center}
 
 .actions .btn{min-width:140px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.06);color:#e6eef8;padding:10px 14px;margin:10px 14px;border-radius:10px}
 .actions .btn:hover{filter:brightness(1.05);transform:translateY(-2px);background: rgba(255,255,255,0.1);}
+.actions .btn:active{transform:translateY(2px) scale(0.995);filter:brightness(0.96)}
 
 @media (max-width:900px){
   .grid{grid-template-columns:1fr}

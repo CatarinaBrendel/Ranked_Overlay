@@ -11,6 +11,7 @@
   const rpCard = document.getElementById('rp-card')
   const rpArea = document.getElementById('rp-area')
   const layoutEl = document.getElementById('layout')
+  const toggleCountersBtn = document.getElementById('toggle-counters')
 
   if(!ranksEl || !tiersEl){
     console.error('Missing required DOM elements: ranks or tiers', {ranksEl, tiersEl})
@@ -48,6 +49,11 @@
     renderLayout()
     winEl.textContent = state.win
     learnEl.textContent = state.learn
+
+    if(toggleCountersBtn){
+      const show = typeof state.showCounters === 'boolean' ? state.showCounters : true
+      toggleCountersBtn.textContent = show ? 'Hide Counters' : 'Show Counters'
+    }
 
     // Show/hide RP controls for ranks without tiers
     if(noTierRanks.has(state.rank)){
@@ -213,6 +219,15 @@
       }finally{
         saveBtn.disabled = false
       }
+    })
+  }
+
+  if(toggleCountersBtn){
+    toggleCountersBtn.addEventListener('click', async ()=>{
+      const current = typeof state.showCounters === 'boolean' ? state.showCounters : true
+      state.showCounters = !current
+      await sendState()
+      renderAll()
     })
   }
 

@@ -26,8 +26,8 @@ const state = {
   win: 0,
   learn: 0,
   rp: 0,
-  // layout: 'vertical' or 'horizontal'
-  layout: 'vertical'
+  layout: 'horizontal',
+  showCounters: true
 }
 
 // Persist state to SQLite using local helper
@@ -41,6 +41,7 @@ try{
     if(typeof row.win === 'number') state.win = row.win
     if(typeof row.learn === 'number') state.learn = row.learn
     if(typeof row.rp === 'number') state.rp = row.rp
+      if(typeof row.showCounters !== 'undefined') state.showCounters = Boolean(row.showCounters)
   }
 }catch(e){
   console.warn('SQLite not available:', e.message)
@@ -84,6 +85,7 @@ app.post('/api/state', (req, res) => {
   if(typeof body.win === 'number') state.win = body.win
   if(typeof body.learn === 'number') state.learn = body.learn
   if(typeof body.rp === 'number') state.rp = body.rp
+  if(typeof body.showCounters === 'boolean') state.showCounters = body.showCounters
   if(body.layout) state.layout = body.layout
   // persist
   try{ if(db) db.upsert(state) }catch(e){}

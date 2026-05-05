@@ -17,9 +17,16 @@ db.exec(`
     tier TEXT,
     win INTEGER DEFAULT 0,
     learn INTEGER DEFAULT 0,
-    rp INTEGER DEFAULT 0
+    rp INTEGER DEFAULT 0,
+    showCounters INTEGER DEFAULT 1
   )
 `)
+
+// Ensure column exists for older DBs
+const cols = db.prepare("PRAGMA table_info(badge)").all().map(c => c.name)
+if(!cols.includes('showCounters')){
+  try{ db.exec("ALTER TABLE badge ADD COLUMN showCounters INTEGER DEFAULT 1") }catch(e){}
+}
 
 const getLatest = () => {
   const row = db.prepare('SELECT * FROM badge ORDER BY id DESC LIMIT 1').get()
@@ -35,17 +42,19 @@ const upsert = (obj) => {
     tier: obj.tier || null,
     win: typeof obj.win === 'number' ? obj.win : 0,
     learn: typeof obj.learn === 'number' ? obj.learn : 0,
-    rp: typeof obj.rp === 'number' ? obj.rp : 0
+    rp: typeof obj.rp === 'number' ? obj.rp : 0,
+    showCounters: typeof obj.showCounters === 'boolean' ? (obj.showCounters ? 1 : 0) : 1
   }
-  const stmt = db.prepare(`INSERT INTO badge (id, updated, rank, tier, win, learn, rp)
-    VALUES (1, @updated, @rank, @tier, @win, @learn, @rp)
+  const stmt = db.prepare(`INSERT INTO badge (id, updated, rank, tier, win, learn, rp, showCounters)
+    VALUES (1, @updated, @rank, @tier, @win, @learn, @rp, @showCounters)
     ON CONFLICT(id) DO UPDATE SET
       updated=excluded.updated,
       rank=excluded.rank,
       tier=excluded.tier,
       win=excluded.win,
       learn=excluded.learn,
-      rp=excluded.rp
+      rp=excluded.rp,
+      showCounters=excluded.showCounters
   `)
   stmt.run(data)
   return getLatest()
